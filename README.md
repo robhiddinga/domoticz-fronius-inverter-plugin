@@ -2,9 +2,9 @@
 Domoticz Fronius Inverter plugin
 --------------------------------
 
-This version of the plugin is running on a Domoticz 3.8799 sinds 2 feb 2018 now.
-As of june 2020 it is still running without issues on Domoticz beta 12119
-It's not feature complete, but it's working. 
+This plugin is running on a Domoticz 3.8799 sinds 2 feb 2018.  
+As of june 2020 it is still running without issues on Domoticz beta 12119.  
+It's not feature complete, but it's working.   
 As the original author does not maintain it anymore, i will give it a try.
 
 It creates 2 devices on the Utility page.
