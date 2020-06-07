@@ -1,9 +1,9 @@
 #           Fronius Inverter Plugin
 #
-#           Author:     ADJ, 2018
+#           Author:     ADJ, 2018, RobH 2020
 #
 """
-<plugin key="froniusInverter" name="Fronius Inverter" author="ADJ" version="0.0.1" wikilink="https://github.com/aukedejong/domoticz-fronius-inverter-plugin.git" externallink="http://www.fronius.com">
+<plugin key="froniusInverter" name="Fronius Inverter" author="ADJ - RobH" version="0.0.2" wikilink="https://github.com/aukedejong/domoticz-fronius-inverter-plugin.git" externallink="http://www.fronius.com">
     <params>
         <param field="Mode1" label="IP Address" required="true" width="200px" />
         <param field="Mode2" label="Device ID" required="true" width="100px" />
@@ -59,6 +59,9 @@ class BasePlugin:
             ipAddress = Parameters["Mode1"]
             deviceId = Parameters["Mode2"]
             jsonObject = self.getInverterRealtimeData( ipAddress, deviceId )
+            #Domoticz.Log(str(jsonObject))
+            status = self.isInverterActive(jsonObject)
+            #Domoticz.Log("Status actief " + str(status))
 
             if (self.isInverterActive(jsonObject)):
 
@@ -96,7 +99,8 @@ class BasePlugin:
             jsonData = urllib.request.urlopen(req).read()
             jsonObject = json.loads(jsonData.decode('utf-8'))
         except (urllib.error.HTTPError, urllib.error.URLError) as e:
-            logErrorMessage("Error: " + str(e) + " URL: " + url)
+            #logErrorMessage("Error: " + str(e) + " URL: " + url)
+            logErrorMessage("Fronius Inverter is offline")
             return
 
         #logDebugMessage("JSON: " + str(jsonData))
@@ -105,16 +109,29 @@ class BasePlugin:
 
 
 
-    def isInverterActive(self, jsonObject):
+    def isInverterActive_org (self, jsonObject):
 
         return jsonObject["Head"]["Status"]["Code"] == 0
 
+    def isInverterActive (self, jsonObject):
+        #Domoticz.Log("JSON " + str(jsonObject))
+        if str(jsonObject) == "None":
+            #Domoticz.Log("No data from inverter")
+            return False
+        else:
+            #Domoticz.Log("Data from inverter")
+            return True
 
     def logErrorCode(self, jsonObject):
 
-        code = jsonObject["Head"]["Status"]["Code"]
-        reason = jsonObject["Head"]["Status"]["Reason"]
-        if (code != 12):
+        if str(jsonObject) == "None":
+           code = 0
+           reason = "Offline"
+           #logErrorMessage("Fronius Inverter is offline")
+        else:
+         code = jsonObject["Head"]["Status"]["Code"]
+         reason = jsonObject["Head"]["Status"]["Reason"]
+         if (code != 12):
             logErrorMessage("Code: " + str(code) + ", reason: " + reason)
 
         return
@@ -123,6 +140,7 @@ class BasePlugin:
     def updateDeviceCurrent(self, jsonObject):
 
         currentWatts = jsonObject["Body"]["Data"]["PAC"]["Value"]
+        Domoticz.Log("Current Watts " + str(currentWatts))
 
         Devices[1].Update(currentWatts, str(currentWatts), Images["FroniusInverter"].ID)
 
