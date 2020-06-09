@@ -100,7 +100,7 @@ class BasePlugin:
             jsonObject = json.loads(jsonData.decode('utf-8'))
         except (urllib.error.HTTPError, urllib.error.URLError) as e:
             logDebugMessage("Error: " + str(e) + " URL: " + url)
-            logErrorMessage("Fronius Inverter is offline")
+            #logErrorMessage("Fronius Inverter is offline")
             return
 
         #logDebugMessage("JSON: " + str(jsonData))
@@ -137,9 +137,9 @@ class BasePlugin:
         else:
          code = jsonObject["Head"]["Status"]["Code"]
          reason = jsonObject["Head"]["Status"]["Reason"]
-
-        if (code == 0):
+         if (code == 0):
             reason = 'Inverter is active, but no production'
+
         if (code != 12):
             logErrorMessage("Code: " + str(code) + ", reason: " + reason)
 
