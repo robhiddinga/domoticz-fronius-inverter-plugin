@@ -99,7 +99,7 @@ class BasePlugin:
             jsonData = urllib.request.urlopen(req).read()
             jsonObject = json.loads(jsonData.decode('utf-8'))
         except (urllib.error.HTTPError, urllib.error.URLError) as e:
-            #logErrorMessage("Error: " + str(e) + " URL: " + url)
+            logDebugMessage("Error: " + str(e) + " URL: " + url)
             logErrorMessage("Fronius Inverter is offline")
             return
 
@@ -114,24 +114,33 @@ class BasePlugin:
         return jsonObject["Head"]["Status"]["Code"] == 0
 
     def isInverterActive (self, jsonObject):
-        #Domoticz.Log("JSON " + str(jsonObject))
+        logDebugMessage("JSON " + str(jsonObject))
         if str(jsonObject) == "None":
             #Domoticz.Log("No data from inverter")
             return False
         else:
-            #Domoticz.Log("Data from inverter")
-            return True
+            #Domoticz.Log("Data from inverter ")
+            s = str(jsonObject)
+            if s.find('PAC') > 0:
+              #Domoticz.Log("Data from inverter " + s)
+              return True
+            else:
+              #Domoticz.Log("Inverter no production")
+              return False
 
     def logErrorCode(self, jsonObject):
 
         if str(jsonObject) == "None":
            code = 0
-           reason = "Offline"
+           reason = " Inverter is offline"
            #logErrorMessage("Fronius Inverter is offline")
         else:
          code = jsonObject["Head"]["Status"]["Code"]
          reason = jsonObject["Head"]["Status"]["Reason"]
-         if (code != 12):
+
+        if (code == 0):
+            reason = 'Inverter is active, but no production'
+        if (code != 12):
             logErrorMessage("Code: " + str(code) + ", reason: " + reason)
 
         return
