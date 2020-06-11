@@ -3,7 +3,7 @@
 #           Author:     ADJ, 2018, RobH 2020
 #
 """
-<plugin key="froniusInverter" name="Fronius Inverter" author="ADJ - RobH" version="0.0.2" wikilink="https://github.com/aukedejong/domoticz-fronius-inverter-plugin.git" externallink="http://www.fronius.com">
+<plugin key="froniusInverter" name="Fronius Inverter" author="ADJ - RobH" version="0.0.2" wikilink="https://github.com/robhiddinga/domoticz-fronius-inverter-plugin.git" externallink="http://www.fronius.com">
     <params>
         <param field="Mode1" label="IP Address" required="true" width="200px" />
         <param field="Mode2" label="Device ID" required="true" width="100px" />
