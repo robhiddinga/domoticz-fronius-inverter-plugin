@@ -2,8 +2,10 @@
 Domoticz Fronius Inverter plugin
 --------------------------------
 
-This version of the plugin is running on my Domoticz 3.8799 sinds 2 feb 2018 now.
-It's not feature complete, but it's working, so I decided to share.
+This version of the plugin is running on a Domoticz 3.8799 sinds 2 feb 2018 now.
+As of june 2020 it is still running without issues on Domoticz beta 12119
+It's not feature complete, but it's working.
+As the original author does not maintain it anymore, i will give it a try.
 
 It creates 3 devices on the Utility page.
 One custom meter showing only the current generated Watts.
