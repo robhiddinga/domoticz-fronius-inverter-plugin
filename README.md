@@ -32,7 +32,7 @@ In your `domoticz/plugins` directory do
 ```bash
 git clone https://github.com/robhiddinga/domoticz-fronius-inverter-plugin.git
 ```
-To update in your `domoticz-fronius-inverter-plugin` directory do  
+To update: in your `domoticz-fronius-inverter-plugin` directory do  
 ```bash
 git pull
 ```
