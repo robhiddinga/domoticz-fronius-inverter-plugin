@@ -15,7 +15,7 @@ The third is a kWh type meter with the current generated Watts and the daytotal.
 The Fronius API only returns the generated kWhs as an integer.
 To make the graphs more fluent the plugin calculates the fractions by using the current Watts generated,
 until the intverter return one kWh more. Then the fraction part is reset and starts calculating again.  
-The option to turn this calcaltion off has been added, but not tested yet.
+The option to turn this calculation off has been added, but not tested yet.
 
 Comparing the Fronius phone app with this plugin, there is a small difference. Acceptable for now.
 
