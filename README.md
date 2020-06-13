@@ -58,6 +58,7 @@ Features to add
 ---------------
 
 - Improved debug options.
+- Code cleanup
 - Some things I can't come up with right now, let me know what you want!
 
 
