@@ -2,8 +2,8 @@
 Domoticz Fronius Inverter plugin
 --------------------------------
 
-This version of the plugin is running since 2 feb 2018 (Domoticz 3.8799).  
-As of june 2020 it is still running without issues on Domoticz beta 12119.  
+This plugin is running without issues since 2 feb 2018 (Domoticz 3.8799).  
+As of june 2020 it is still running on Domoticz beta 12119.  
 It's not feature complete yet, but it's working.  
 As the original author does not maintain it anymore, i will give it a try.
 
