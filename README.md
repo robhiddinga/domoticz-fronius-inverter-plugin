@@ -1,15 +1,17 @@
+Not maintained anymore.
+-----------------------
+
 # domoticz-fronius-inverter-plugin
 Domoticz Fronius Inverter plugin
 --------------------------------
 
-This plugin is running on a Domoticz 3.8799 sinds 2 feb 2018.  
-As of june 2020 it is still running without issues on Domoticz beta 12119.  
-It's not feature complete, but it's working.   
-As the original author does not maintain it anymore, i will give it a try.
+This version of the plugin is running on my Domoticz 3.8799 sinds 2 feb 2018 now.
+It's not feature complete, but it's working, so I decided to share.
 
-It creates 2 devices on the Utility page.
+It creates 3 devices on the Utility page.
 One custom meter showing only the current generated Watts.
-The other is a kWh type meter
+The second is a kWh type meter with the current generated Watts and the yeartotal
+The third is a kWh type meter with the current generated Watts and the daytotal
 
 The Fronius API only returns the generated kWhs as an integer.
 To make the graphs more fluent the plugin calculates the fractions by using the current Watts generated,
