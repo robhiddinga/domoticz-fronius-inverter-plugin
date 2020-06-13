@@ -49,10 +49,7 @@ Currently the plugin only supports Fronius API version 1
 Features to add
 ---------------
 
-- Debug options.
-- Option to select which devices should be created
-- Option the disable the fraction calculation feature
-- Detection of Fronius API version
+- Improved debug options.
 - Some things I can't remember now, let me know what you want!
 
 

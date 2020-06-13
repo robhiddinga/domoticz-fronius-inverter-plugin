@@ -35,6 +35,7 @@ class BasePlugin:
     intervalCounter = None
     heartbeat = 30
     previousTotalWh = 0
+    previousTodayWh = 0
     previousCurrentWatt = 0
     whFraction = 0
 
@@ -67,7 +68,7 @@ class BasePlugin:
             ipAddress  = Parameters["Mode1"]
             deviceId   = Parameters["Mode2"]
             jsonObject = self.getInverterRealtimeData( ipAddress, deviceId )
-            #Domoticz.Log(str(jsonObject))
+            Domoticz.Log(str(jsonObject))
             status = self.isInverterActive(jsonObject)
             #Domoticz.Log("Status actief " + str(status))
 
@@ -127,8 +128,8 @@ class BasePlugin:
               #Domoticz.Log("Data from inverter " + s)
               return True
             else:
-              #Domoticz.Log("Inverter no production")
-              return False
+              #Domoticz.Log("Inverter no production, but active")
+              return True
 
     def logErrorCode(self, jsonObject):
 
@@ -150,19 +151,28 @@ class BasePlugin:
 
     def updateDeviceCurrent(self, jsonObject):
 
-        currentWatts = jsonObject["Body"]["Data"]["PAC"]["Value"]
+        s = str(jsonObject)
+        if s.find('PAC') > 0:
+         currentWatts = jsonObject["Body"]["Data"]["PAC"]["Value"]
+        else:
+         currentWatts = 0
         #Domoticz.Log("Current Watts " + str(currentWatts))
-
         Devices[1].Update(currentWatts, str(currentWatts), Images["FroniusInverter"].ID)
 
         return
 
     def updateDeviceMeter(self, jsonObject):
 
+        s = str(jsonObject)
+        if s.find('PAC') > 0:
+         currentWatts = jsonObject["Body"]["Data"]["PAC"]["Value"]
+        else:
+         currentWatts = 0    
+
         totalWh = jsonObject["Body"]["Data"]["TOTAL_ENERGY"]["Value"]
-        currentWatts = jsonObject["Body"]["Data"]["PAC"]["Value"]
 
         todayWh = jsonObject["Body"]["Data"]["DAY_ENERGY"]["Value"]
+        self.previousTodayWh = todayWh
 
         if Parameters["Mode5"] == True:
          if (self.previousTotalWh < totalWh):
@@ -174,12 +184,14 @@ class BasePlugin:
             averageWatts =  (self.previousCurrentWatt + currentWatts) / 2
             self.whFraction = self.whFraction + int(round(averageWatts / 60))
             logDebugMessage("Fraction calculated: " + str(currentWatts) + " - " + str(self.whFraction))
+         calculatedWh = totalWh + self.whFraction
 
         else:
-           calculatedWh = totalWh
+           calculatedWh         = totalWh
+           self.previousTotalWh = totalWh
 
         self.previousCurrentWatt = currentWatts
-        calculatedWh = totalWh + self.whFraction
+
         Devices[2].Update(0, str(currentWatts) + ";" + str(calculatedWh))
 
         Devices[3].Update(0, str(currentWatts) + ";" + str(todayWh))
@@ -189,10 +201,19 @@ class BasePlugin:
     def updateDeviceOff(self):
 
         Devices[1].Update(0, "0", Images["FroniusInverterOff"].ID)
-        calculatedWh = self.previousTotalWh + self.whFraction
-        Devices[2].Update(0, "0;" + str(calculatedWh))
-        Devices[3].Update(0, "0;" + str(todayWh))
-        
+        if Parameters["Mode5"] == True:
+         calculatedWh = self.previousTotalWh + self.whFraction
+        else:
+         calculatedWh = self.previousTotalWh
+
+        todayWh  = self.previousTodayWh
+
+        if  calculatedWh > 0:
+         Devices[2].Update(0, "0;" + str(calculatedWh))
+
+        if  todayWh > 0:
+         Devices[3].Update(0, "0;" + str(todayWh))
+
 
     def onStop(self):
         logDebugMessage("onStop called")
