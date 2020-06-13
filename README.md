@@ -2,12 +2,12 @@
 Domoticz Fronius Inverter plugin
 --------------------------------
 
-This version of the plugin is running on a Domoticz 3.8799 sinds 2 feb 2018 now.
-As of june 2020 it is still running without issues on Domoticz beta 12119
-It's not feature complete, but it's working.
+This version of the plugin is running since 2 feb 2018 (Domoticz 3.8799).  
+As of june 2020 it is still running without issues on Domoticz beta 12119.  
+It's not feature complete yet, but it's working.  
 As the original author does not maintain it anymore, i will give it a try.
 
-It creates 3 devices on the Utility page.
+It creates 3 devices on the Utility page.  
 One custom meter showing only the current generated Watts.
 The second is a kWh type meter with the current generated Watts and the yeartotal
 The third is a kWh type meter with the current generated Watts and the daytotal
@@ -41,21 +41,19 @@ sudo service domoticz.sh restart
 Now go to **Setup**, **Hardware** in Domoticz. There you add
 **Fronius Inverter**.
 
-Fill in the IP address and device ID.
-For me the device ID is 1.
+Fill in the IP address and device ID of your inverter.
+The device ID is usually 1.
 
 Currently the plugin only supports Fronius API version 1
 
-Feature to add
---------------
+Features to add
+---------------
 
 - Debug options.
 - Option to select which devices should be created
 - Option the disable the fraction calculation feature
 - Detection of Fronius API version
-- Some things I can't remember now.
-
-I don't have much spare time, so this can take a while.
+- Some things I can't remember now, let me know what you want!
 
 
 This plugin uses an icon by 
