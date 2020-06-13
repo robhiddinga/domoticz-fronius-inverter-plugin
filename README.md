@@ -14,8 +14,8 @@ The third is a kWh type meter with the current generated Watts and the daytotal.
 
 The Fronius API only returns the generated kWhs as an integer.
 To make the graphs more fluent the plugin calculates the fractions by using the current Watts generated,
-until the intverter return one kWh more. Then the fraction part is reset and starts calculating again.
-The option to turn this has been added, but not tested yet
+until the intverter return one kWh more. Then the fraction part is reset and starts calculating again.  
+The option to turn this calcaltion off has been added, but not tested yet.
 
 Comparing the Fronius phone app with this plugin, there is a small difference. Acceptable for now.
 
@@ -49,13 +49,16 @@ Now go to **Setup**, **Hardware** in Domoticz. There you add
 Fill in the IP address and device ID of your inverter.
 The device ID is usually 1.
 
-Currently the plugin only supports Fronius API version 1
+Choose if you want to use the fraction calculations.
+Default Yes. No not supported yet
+
+Currently the plugin only supports Fronius API version V1
 
 Features to add
 ---------------
 
 - Improved debug options.
-- Some things I can't remember now, let me know what you want!
+- Some things I can't come up with right now, let me know what you want!
 
 
 This plugin uses an icon by 
