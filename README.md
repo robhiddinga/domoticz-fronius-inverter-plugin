@@ -7,16 +7,17 @@ As of june 2020 it is still running on Domoticz beta 12119.
 It's not feature complete yet, but it's working.  
 As the original author does not maintain it anymore, i will give it a try.
 
-It creates 3 devices on the Utility page.  
-One custom meter showing only the current generated Watts.
-The second is a kWh type meter with the current generated Watts and the yeartotal
-The third is a kWh type meter with the current generated Watts and the daytotal
+It creates 3 devices on the Utility page.    
+One custom meter showing only the current generated Watts.  
+The second is a kWh type meter with the current generated Watts and the yeartotal.  
+The third is a kWh type meter with the current generated Watts and the daytotal.  
 
 The Fronius API only returns the generated kWhs as an integer.
 To make the graphs more fluent the plugin calculates the fractions by using the current Watts generated,
 until the intverter return one kWh more. Then the fraction part is reset and starts calculating again.
+The option to turn this has been added, but not tested yet
 
-Comparing the Fronius phone app with this plugin, there is a small difference. Acceptable for me.
+Comparing the Fronius phone app with this plugin, there is a small difference. Acceptable for now.
 
 - Fronius app - Dommoticz plugin (kWh generated per day)
 - 10.4 - 10.692
@@ -26,10 +27,14 @@ Comparing the Fronius phone app with this plugin, there is a small difference. A
 Installation
 ------------
 
-In your `domoticz/plugins` directory do
+In your `domoticz/plugins` directory do  
 
 ```bash
 git clone https://github.com/robhiddinga/domoticz-fronius-inverter-plugin.git
+```
+To update in your `domoticz-fronius-inverter-plugin` directory do  
+```bash
+git pull
 ```
 
 Restart your Domoticz service with:
