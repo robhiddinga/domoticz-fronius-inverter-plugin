@@ -52,7 +52,8 @@ The device ID is usually 1.
 Choose if you want to use the fraction calculations.
 Default Yes. No not supported yet
 
-Currently the plugin only supports Fronius API version V1
+The plugin supports Fronius API version V1     
+(I am not aware of any other version)
 
 Features to add
 ---------------
