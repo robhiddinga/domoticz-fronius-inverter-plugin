@@ -1,6 +1,3 @@
-Not maintained anymore.
------------------------
-
 # domoticz-fronius-inverter-plugin
 Domoticz Fronius Inverter plugin
 --------------------------------
