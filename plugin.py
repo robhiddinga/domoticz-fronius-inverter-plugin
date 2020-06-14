@@ -170,6 +170,7 @@ class BasePlugin:
     def doFractionCalculations(self):
 
         #today
+        logDebugMessage("Prev.Today="+str(self.previousTodayWh))
         if (self.previousTodayWh < self.todayWh):
             logDebugMessage("New today recieved: prev:" + str(self.previousTodayWh) + " - new:" + str(self.todayWh) + " - last fraction: " + str(self.whFraction))
             self.whFraction = 0
@@ -185,6 +186,7 @@ class BasePlugin:
         logDebugMessage("Today calculated: " + str(self.calcTodayWh))
 
         #year
+        logDebugMessage("Prev.Total="+str(self.previousTotalWh))
         if (self.previousTotalWh < self.totalWh):
             logDebugMessage("New total recieved: prev:" + str(self.previousTotalWh) + " - new:" + str(self.totalWh) + " - last fraction: " + str(self.whFraction))
             self.whFraction = 0
