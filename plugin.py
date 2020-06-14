@@ -48,6 +48,7 @@ class BasePlugin:
         if Parameters["Mode6"] != "Normal":
             Domoticz.Debugging(1)
 
+        logDebugMessage(str(Devices))
         if (len(Devices) == 0):
             Domoticz.Device(Name="Current power",  Unit=1, TypeName="Custom", Options = { "Custom" : "1;Watt"}, Used=1).Create()
             Domoticz.Device(Name="Total power",    Unit=2, TypeName="kWh", Used=1).Create()
@@ -255,7 +256,7 @@ class BasePlugin:
         except KeyError as e:
          cause = e.args[0]
          logErrorMessage("Cause " + str(cause))
-         
+
         return
 
 
