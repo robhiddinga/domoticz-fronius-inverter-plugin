@@ -60,6 +60,7 @@ Features to add
 
 - Improved debug options.
 - Code cleanup
+- Use other collections besides CommonInverterData
 - Some things I can't come up with right now, let me know what you want!
 
 
